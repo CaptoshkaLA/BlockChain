@@ -34,7 +34,7 @@ public class Node {
 
     public void add(Block block) {
         try {
-            this.blockChain.add(block);
+            this.blockChain.addBlock(block);
         } catch (IllegalArgumentException e) {
             if (this.nodes.size() > 0) {
                 try {
@@ -47,7 +47,7 @@ public class Node {
     }
 
     public void mine(Block block) {
-        this.blockChain.add(block);
+        this.blockChain.addBlock(block);
         this.nodes.forEach((node) -> {
             try {
                 node.add((Block) block.clone());

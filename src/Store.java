@@ -30,9 +30,9 @@ public class Store extends Node implements Runnable {
             );
             try {
                 this.mine(block);
-                System.out.println(String.format("%s mined: %s", address, block.hash));
+                System.out.println(String.format("%s mined: %s", address, block.hashCode));
             } catch (IllegalArgumentException ex) {
-                System.out.println(String.format("%s mined invalid block: %s", address, block.hash));
+                System.out.println(String.format("%s mined invalid block: %s", address, block.hashCode));
             }
             Thread.sleep(random.nextInt(3) * 1000 + 100);
         }
@@ -42,10 +42,10 @@ public class Store extends Node implements Runnable {
         System.out.println("<----- Block chain of [" + address + "] ----->");
 
         this.blockChain.getBlocks().forEach(block -> {
-            System.out.println(block.hash);
+            System.out.println(block.hashCode);
         });
 
-        System.out.println("<----- End of BlockChain ----->");
+        System.out.println("<----- End of BlockChain.java ----->");
     }
 
     @Override

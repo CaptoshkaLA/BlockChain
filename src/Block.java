@@ -11,18 +11,19 @@ import java.util.Date;
  */
 
 public class Block implements Cloneable {
-    public String hash;
-    public String previousHash;
+
+    public String hashCode;
+    public String previousHashCode;
     public Order order;
     public long timeStamp;
 
-    public Block(Order order, String previousHash) {
+    public Block(Order order, String previousHashCode) {
         this.order = order;
-        this.previousHash = previousHash;
+        this.previousHashCode = previousHashCode;
         this.timeStamp = new Date().getTime();
 
-        this.hash = Generator.generateHash(
-                this.previousHash
+        this.hashCode = Generator.generateHash(
+                this.previousHashCode
                         + this.timeStamp
                         + this.order.toString());
     }
@@ -31,8 +32,8 @@ public class Block implements Cloneable {
         Order order = new Order("Its me", "Nothing", 0);
         Block block = new Block(order, "");
         block.timeStamp = 0;
-        block.hash = Generator.generateHash(
-                block.previousHash
+        block.hashCode = Generator.generateHash(
+                block.previousHashCode
                         + block.timeStamp
                         + block.order.toString());
         return block;

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Blockchain stores a series of blocks that each block points to the previous one(like a LinkedList)
+ * BlockchainOfBlocks stores a series of blocks that each block points to the previous one(like a LinkedList)
  * @author captoshka
  * @see Cloneable
  * @see Node
@@ -11,42 +11,42 @@ import java.util.ArrayList;
  */
 
 public class BlockChain implements Cloneable {
-    private final ArrayList<Block> chain;
+    private final ArrayList<Block> chainOfBlocks;
 
     public BlockChain() {
-        this.chain = new ArrayList<>();
-        this.chain.add(Block.getGenesisBlock());
+        this.chainOfBlocks = new ArrayList<>();
+        this.chainOfBlocks.add(Block.getGenesisBlock());
     }
 
     public ArrayList<Block> getBlocks() {
-        return (ArrayList<Block>) chain.clone();
+        return (ArrayList<Block>) chainOfBlocks.clone();
     }
 
     public long size() {
-        return chain.size();
+        return chainOfBlocks.size();
     }
 
-    public void add(Block block) {
-        if (validateBlock(chain.get(chain.size() - 1), block)) {
-            chain.add(block);
+    public void addBlock(Block block) {
+        if (validateBlock(chainOfBlocks.get(chainOfBlocks.size() - 1), block)) {
+            chainOfBlocks.add(block);
         } else {
             throw new IllegalArgumentException("Invalid block");
         }
     }
 
     public String getLastHash() {
-        return this.chain.get(this.chain.size() - 1).hash;
+        return this.chainOfBlocks.get(this.chainOfBlocks.size() - 1).hashCode;
     }
 
     public boolean validateBlock(Block previousBlock, Block block) {
-        return block.previousHash.equals(previousBlock.hash);
+        return block.previousHashCode.equals(previousBlock.hashCode);
     }
 
     public boolean validate() {
-        ArrayList<Block> subChain = (ArrayList<Block>) chain.subList(1, chain.size() - 1);
-        Block previousBlock = chain.get(0);
+        ArrayList<Block> subchainOfBlocks = (ArrayList<Block>) chainOfBlocks.subList(1, chainOfBlocks.size() - 1);
+        Block previousBlock = chainOfBlocks.get(0);
 
-        for (Block currentBlock : subChain) {
+        for (Block currentBlock : subchainOfBlocks) {
             if (!validateBlock(previousBlock, currentBlock)) {
                 return false;
             }
